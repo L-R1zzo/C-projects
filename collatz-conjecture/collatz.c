@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int steps(int start){
+    if (start < 1){
+        return -1;
+    }
+    if (start == 1){
+        return 0;
+    }
+    if (start % 2 == 0){
+        return 1 + steps(start/2);
+    }
+    return 1 + steps(3*start + 1);
+}
+
+int main(void){
+    int n;
+    printf("Choose a positive integer: ");
+    scanf("%d", &n);
+    printf("\n");
+    printf("Steps needed for reaching 1: ");
+    printf("%d", steps(n));
+    printf("\n");
+    return 0;
+}
