@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+
+typedef enum { CAN_NOT_ATTACK, CAN_ATTACK, INVALID_POSITION } attack_status_t;
+
+typedef struct {
+   uint8_t row;
+   uint8_t column;
+} position_t;
+
+attack_status_t can_attack(position_t queen1, position_t queen2){
+    if (queen1.row == queen2.row && queen1.column == queen2.column){
+        return INVALID_POSITION;
+    }
+    
+    if (queen1.row <= 7 && queen2.row <= 7 && queen1.column <= 7 && queen2.column <= 7){
+        if (queen1.row == queen2.row){
+            return CAN_ATTACK;
+        } else if (queen1.column == queen2.column){
+            return CAN_ATTACK;
+        } else if (abs(queen1.row - queen2.row) == abs(queen1.column - queen2.column)){
+            return CAN_ATTACK;
+        } else {
+            return CAN_NOT_ATTACK;
+        }
+    } else {
+        return INVALID_POSITION;
+    }
+}
+
+int main(void){
+    position_t queen1;
+    position_t queen2;    
+    
+    printf("Select a row (0-7) and a column (0-7) for the white queen leaving a space between the two values: ");
+    scanf("%hhu %hhu", &queen1.row, &queen1.column);
+    printf("Select a row (0-7) and a column (0-7) for the black queen leaving a space between the two values: ");
+    scanf("%hhu %hhu", &queen2.row, &queen2.column);
+
+    printf("The status of the two queens is: %d\n", can_attack(queen1, queen2));
+    printf("Remember: 0 cannot attack, 1 can attack, 2 invalid position.\n");
+    
+    return 0;
+}
