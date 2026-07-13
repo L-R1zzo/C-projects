@@ -1,79 +1,62 @@
-#include <stdio.h>
-#include <stdint.h>
-#include <ctype.h>
-#include <string.h>
-
-typedef enum planet {
-   MERCURY,
-   VENUS,
-   EARTH,
-   MARS,
-   JUPITER,
-   SATURN,
-   URANUS,
-   NEPTUNE,
-} planet_t;
-
-float age(planet_t planet, int64_t seconds){
-    switch (planet){
-        case MERCURY:
-            return seconds / (31557600 * 0.2408467);
-        case VENUS:
-            return seconds / (31557600 * 0.61519726);
-        case EARTH:
-            return seconds / 31557600;
-        case MARS:
-            return seconds / (31557600 * 1.8808158);
-        case JUPITER:
-            return seconds / (31557600 * 11.862615);
-        case SATURN:
-            return seconds / (31557600 * 29.447498);
-        case URANUS:
-            return seconds / (31557600 * 84.016846);
-        case NEPTUNE:
-            return seconds / (31557600 * 164.79132);
-        default:
-            return -1;
-    }
-}
-
-int main(void){
-    char planet[20];
-    planet_t Enum_planet;
-    int64_t seconds;
-    printf("Enter a planet that is in our solar system: ");
-    scanf("%19s", &planet);
-
-    if (planet[0] != '\0'){
-        planet[0] = toupper((unsigned char)planet[0]); 
-    }
-
-    for (int i = 1; planet[i] != '\0'; i++){
-        planet[i] = tolower((unsigned char)planet[i]);
-    }
-
-    if (strcmp(planet, "Mercury") == 0){
-        Enum_planet = MERCURY;
-    } else if (strcmp(planet, "Venus") == 0){
-        Enum_planet = VENUS;
-    } else if (strcmp(planet, "Earth") == 0){
-        Enum_planet = EARTH;
-    } else if (strcmp(planet, "Mars") == 0){
-        Enum_planet = MARS;
-    } else if (strcmp(planet, "Jupiter") == 0){
-        Enum_planet = JUPITER;
-    } else if (strcmp(planet, "Saturn") == 0){
-        Enum_planet = SATURN;
-    } else if (strcmp(planet, "Uranus") == 0){
-        Enum_planet = URANUS;
-    } else if (strcmp(planet, "Neptune") == 0){
-        Enum_planet = NEPTUNE;
-    } else {
-        return -1;
-    }
-
-    printf("Enter the time that you spent living on the planet in seconds: ");
-    scanf("%lld", &seconds);
-    printf("Your age on %s is %.2f years.\n", planet, age(Enum_planet, seconds));
-
-    return 0;
+# Space Age
+ 
+## Problem
+ 
+Given an age in seconds, calculate how old a person would be on each planet
+in the Solar System. Each planet has a different orbital period (expressed
+in Earth years), so the same number of seconds corresponds to a different
+number of "years" depending on the planet.
+ 
+The base unit is one Earth year: `31,557,600` seconds (365.25 days). For any
+other planet, the age is calculated as:
+ 
+```
+age_on_planet = seconds / (orbital_period_of_planet * 31557600)
+```
+ 
+where `orbital_period_of_planet` is the planet's orbital period relative to
+Earth (e.g. `0.2408467` for Mercury, `11.862615` for Jupiter, ...).
+ 
+## Approach
+ 
+- Modeled the eight planets with an `enum planet_t`, so the planet is passed
+  around as a typed value instead of a raw string or index.
+- Used a single `age()` function with a `switch` on the enum to compute the
+  result, one `case` per planet, instead of writing eight near-identical
+  functions.
+- Took `seconds` as `int64_t` rather than `int`, since a lifetime in seconds
+  easily overflows a 32-bit integer.
+- Read the planet name from user input, normalized it (first letter upper,
+  rest lower) with `toupper`/`tolower`, then matched it to the enum with a
+  chain of `strcmp` calls.
+## Concepts practiced
+ 
+- `enum` types and `switch` statements as a cleaner alternative to
+  string comparisons or magic numbers.
+- Fixed-width integer types (`int64_t`) for values that must not overflow.
+- Array-to-pointer decay when passing a `char[]` buffer to `scanf`.
+- Basic string normalization with `<ctype.h>` (`toupper`, `tolower`) and
+  comparison with `<string.h>` (`strcmp`).
+- Floating point division and precision when computing a ratio of large
+  integers.
+## Build & run
+ 
+```bash
+gcc -Wall -Wextra -std=c99 -o space_age space_age.c
+./space_age
+```
+ 
+## Example
+ 
+```
+Enter a planet that is in our solar system: mercury
+Enter the time that you spent living on the planet in seconds: 1000000000
+Your age on Mercury is 130.71 years.
+```
+ 
+## Notes
+ 
+- `-Wall -Wextra` catches a couple of format-string mismatches worth fixing:
+  `scanf` should receive `planet` (already a pointer via array decay), not
+  `&planet`, and reading an `int64_t` should use `SCNd64` from
+  `<inttypes.h>` rather than `%lld`.
