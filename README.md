@@ -35,7 +35,7 @@ Each exercise folder contains:
 - The exercise source file
 - A README explaining the concept practiced, the approach taken, and complexity notes
 - Exercism's test suite for that exercise
-> Individual exercises aren't listed here on purpose — check the folders directly. This keeps this README stable and avoids updating it on every push.
+> Individual exercises aren't listed here on purpose — check the folder solutions directly. This keeps this README stable and avoids updating it on every push.
  
 ## 📖 Topics covered so far
  
