@@ -23,15 +23,22 @@ This repo is one part of a broader offensive security roadmap:
 - **Standard flags**: `gcc -Wall -Wextra -std=c99`
 ## 📂 Structure
  
-Each exercise/project lives in its own folder with its own `README.md`, containing:
-- A short explanation of the concept being practiced
-- Compile & run instructions
-- Example output where relevant
-> Individual projects aren't listed here on purpose — check the folders directly. This keeps this README stable and avoids updating it on every push.
+Solutions are organized by track and exercise, synced automatically from Exercism via GitHub pull requests:
+ 
+```
+├── solutions
+├── README.md
+└── .gitignore
+```
+ 
+Each exercise folder contains:
+- The exercise source file
+- A README explaining the concept practiced, the approach taken, and complexity notes
+- Exercism's test suite for that exercise
+> Individual exercises aren't listed here on purpose — check the folders directly. This keeps this README stable and avoids updating it on every push.
  
 ## 📖 Topics covered so far
  
-- `scanf` vs `fgets`, and why buffer-bound input matters
 - Pointers, addresses, and array decay
 - Stack vs heap, stack frames, and why returning local buffers is dangerous
 - Functions that return strings via caller-provided buffers
