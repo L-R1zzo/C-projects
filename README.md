@@ -1,21 +1,19 @@
 # 🧩 C Projects
  
-This repository collects the C exercises and small projects I'm working through as part of my learning path toward **low-level programming and offensive security**.
+This repository collects the C exercises and small projects I'm working through to build solid foundations in **C, pointers, and memory management** — the core of what's needed to walk into **Fondamenti di Informatica I** already comfortable with the language, instead of learning it from zero during the semester.
  
 ## 🎯 Why C
  
-C sits directly on top of how a computer actually works: manual memory management, pointers, the stack, the heap, compilation into machine code. Understanding these fundamentals is what makes concepts like memory corruption, buffer overflows, and exploit development possible to grasp later on — rather than treating them as black boxes.
+C sits directly on top of how a computer actually works: manual memory management, pointers, the stack, the heap, compilation into machine code. Getting these fundamentals right now — before the exam clock is ticking — means less time debugging segfaults in December and more time on the actual coursework (data structures, algorithms, complexity).
  
 ## 🗺️ Learning path context
  
-This repo is one part of a broader offensive security roadmap:
+This repo is part of my prep for the first-semester exams of my first year (Computer Engineering), specifically for building solid **computer science fundamentals** — pointers, memory, and data structures — ahead of Fondamenti di Informatica I.
  
-1. **Python** → scripting & tooling foundations ✅
-2. **C** → memory, pointers, low-level systems (this repo) 🔄
-3. Networking protocols & CTF fundamentals
-4. Security tools development
-5. Web security (PortSwigger Academy)
-6. Practical machines (HackTheBox)
+🎯 Target: strong grades at the January/February exam session.
+ 
+> Offensive security / low-level exploitation stays a long-term interest, but the near-term goal is nailing the first-semester exams first — C fundamentals learned properly now double as prep for both.
+ 
 ## 🛠️ Environment
  
 - **OS**: Fedora Linux (KDE Plasma)
@@ -42,6 +40,8 @@ Each exercise folder contains:
 - Pointers, addresses, and array decay
 - Stack vs heap, stack frames, and why returning local buffers is dangerous
 - Functions that return strings via caller-provided buffers
+**Next targets**: dynamic memory (`malloc`/`free`/`realloc`), recursion, file I/O, linked lists.
+ 
 ## 🚀 Goal
  
-Build a solid, exploit-development-oriented understanding of C — not just syntax, but *why* the language behaves the way it does at the memory level.
+Build solid, no-gaps C fundamentals — not just syntax, but *why* the language behaves the way it does at the memory level — so that Fondamenti di Informatica I is a confirmation of what I already know, not a first encounter.
